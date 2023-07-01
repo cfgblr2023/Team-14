@@ -53,7 +53,9 @@ class _HomeState extends State<Home> {
               ),
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/register');
+              },
               icon: const Icon(Icons.app_registration_rounded),
               label: const Text(
                 "Resgister",
