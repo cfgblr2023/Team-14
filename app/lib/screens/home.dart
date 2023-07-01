@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
               margin: const EdgeInsets.only(bottom: 20),
               child: ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/register');
+                  Navigator.pushNamed(context, '/register-volunteer');
                 },
                 icon: const Icon(Icons.volunteer_activism),
                 label: const Text(

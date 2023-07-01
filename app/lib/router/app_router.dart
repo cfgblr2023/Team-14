@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../screens/dashboard.dart';
 import '../screens/home.dart';
 import '../screens/register.dart';
+import '../screens/register_volunteer.dart';
 
 class AppRouter {
   AppRouter();
@@ -23,8 +24,17 @@ class AppRouter {
         return getDashboardRoute();
       case '/login':
         return getLoginRoute();
+      case '/register-volunteer':
+        return getRegisterVolunteerRoute();
     }
     return null;
+  }
+
+  Route? getRegisterVolunteerRoute() {
+    return MaterialPageRoute(
+      // Builder Function
+      builder: (context) => const RegisterVolunteer(),
+    );
   }
 
   Route? getDashboardRoute() {

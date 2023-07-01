@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:app/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MyLogin extends StatefulWidget {
-  const MyLogin({Key? key}) : super(key: key);
+class RegisterVolunteer extends StatefulWidget {
+  const RegisterVolunteer({Key? key}) : super(key: key);
 
   @override
-  _MyLoginState createState() => _MyLoginState();
+  _RegisterVolunteerState createState() => _RegisterVolunteerState();
 }
 
-class _MyLoginState extends State<MyLogin> {
+class _RegisterVolunteerState extends State<RegisterVolunteer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +40,7 @@ class _MyLoginState extends State<MyLogin> {
               Container(
                 padding: const EdgeInsets.only(top: 30),
                 child: Text(
-                  'Login',
+                  'Swipe for Good!',
                   style: GoogleFonts.poppins(
                       color: White,
                       fontSize: 40,
@@ -59,6 +59,25 @@ class _MyLoginState extends State<MyLogin> {
                         margin: EdgeInsets.only(left: 35, right: 35),
                         child: Column(
                           children: [
+                            TextField(
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  hintText: "Name",
+                                  hintStyle:
+                                      const TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
                             TextField(
                               style: const TextStyle(color: Colors.white),
                               decoration: InputDecoration(
@@ -101,7 +120,7 @@ class _MyLoginState extends State<MyLogin> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Sign In',
+                                  'Sign Up',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 27,
@@ -112,10 +131,7 @@ class _MyLoginState extends State<MyLogin> {
                                   backgroundColor: White,
                                   child: IconButton(
                                       color: PrimaryColor,
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/dashboard');
-                                      },
+                                      onPressed: () {Navigator.pushNamed(context, '/volunteer-dashboard');},
                                       icon: Icon(
                                         Icons.arrow_forward,
                                       )),

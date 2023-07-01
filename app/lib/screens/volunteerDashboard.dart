@@ -125,8 +125,7 @@ class ApprovalModal extends StatelessWidget {
               Text(
                 'Category: ...............................',
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ]),
           ),
@@ -137,8 +136,7 @@ class ApprovalModal extends StatelessWidget {
               Text(
                 'Description: ...............................',
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ]),
           ),
