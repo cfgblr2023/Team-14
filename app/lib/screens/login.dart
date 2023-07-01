@@ -1,4 +1,5 @@
 import 'package:app/api/auth_api.dart';
+import 'package:app/api/models/LoginRequest.dart';
 import 'package:app/components/GradientContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:app/constants/colors.dart';
@@ -20,21 +21,24 @@ class _MyLoginState extends State<MyLogin> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
-
-
   @override
-  void initState() {
-    
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
-
-    void submitHandler () {
-      
+    void submitHandler() async {
+      _authClient
+          .login(LoginRequest(
+              email: _emailController.text, password: _passwordController.text))
+          .then((value) {
+        if (value.success) {
+          Navigator.pushNamed(context, '/dashboard');
+        } else {
+          Navigator.pushNamed(context, '/login');
+        }
+      });
     }
-    
+
     return Scaffold(
       body: GradientContainer(
         colors: const [PrimaryColor, PrimaryColor, SecondaryColor],

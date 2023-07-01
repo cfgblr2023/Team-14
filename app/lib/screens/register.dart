@@ -34,7 +34,7 @@ class _MyRegisterState extends State<MyRegister> {
             password: _passwordController.text))
         .then((value) => {
               if (value.success)
-                {Navigator.pushNamed(context, '/login')}
+                {Navigator.pushNamed(context, '/dashboard')}
               else
                 {Navigator.pushNamed(context, '/register')}
             });
