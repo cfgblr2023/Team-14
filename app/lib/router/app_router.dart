@@ -11,10 +11,9 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return getIndexRoute();
-      case 'register':
+      case '/register':
         return getRegisterRoute();
     }
-
     return null;
   }
 
