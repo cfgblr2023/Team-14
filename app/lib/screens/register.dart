@@ -56,7 +56,7 @@ class _MyRegisterState extends State<MyRegister> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 35, right: 35),
+                        // margin: EdgeInsets.only(left: 35, right: 35),
                         child: Column(
                           children: [
                             TextField(
