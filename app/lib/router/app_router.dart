@@ -1,7 +1,12 @@
+import 'package:app/screens/login.dart';
+import 'package:app/screens/upload.dart';
+import 'package:app/screens/volunteerDashboard.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/dashboard.dart';
 import '../screens/home.dart';
 import '../screens/register.dart';
+import '../screens/register_volunteer.dart';
 
 class AppRouter {
   AppRouter();
@@ -13,8 +18,37 @@ class AppRouter {
         return getIndexRoute();
       case '/register':
         return getRegisterRoute();
+      case '/volunteer-dashboard':
+        return getVolunteerDashboardRoute();
+      case '/dashboard':
+        return getDashboardRoute();
+      case '/login':
+        return getLoginRoute();
+      case '/register-volunteer':
+        return getRegisterVolunteerRoute();
     }
     return null;
+  }
+
+  Route? getRegisterVolunteerRoute() {
+    return MaterialPageRoute(
+      // Builder Function
+      builder: (context) => const RegisterVolunteer(),
+    );
+  }
+
+  Route? getDashboardRoute() {
+    return MaterialPageRoute(
+      // Builder Function
+      builder: (context) => Upload(),
+    );
+  }
+
+  Route? getLoginRoute() {
+    return MaterialPageRoute(
+      // Builder Function
+      builder: (context) => const MyLogin(),
+    );
   }
 
   // Function to Return the Home Screen
@@ -30,6 +64,13 @@ class AppRouter {
     return MaterialPageRoute(
       // Builder Function
       builder: (context) => const MyRegister(),
+    );
+  }
+
+  Route? getVolunteerDashboardRoute() {
+    return MaterialPageRoute(
+      // Builder Function
+      builder: (context) => const VolunteerDashboard(),
     );
   }
 }
