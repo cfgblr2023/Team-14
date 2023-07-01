@@ -10,6 +10,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  MyApp({super.key});  
   final AppRouter _appRouter = AppRouter();
 
   @override
@@ -18,12 +19,17 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
 
+    // Returning the Material App
     return MaterialApp(
       title: 'Sensing Local',
+
+      // Configuring Theme
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: SecondaryColor),
         useMaterial3: true,
       ),
+
+      // Managing Routes
       onGenerateRoute: _appRouter.onGenerateRoute,
       debugShowCheckedModeBanner: false,
     );

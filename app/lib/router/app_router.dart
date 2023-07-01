@@ -5,6 +5,7 @@ import '../screens/home.dart';
 class AppRouter {
   AppRouter();
 
+  // Function to Generate Routes
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
@@ -14,8 +15,10 @@ class AppRouter {
     return null;
   }
 
+  // Function to Return the Home Screen
   Route? getIndexRoute() {
     return MaterialPageRoute(
+      // Builder Function
       builder: (context) => const Home(),
     );
   }
