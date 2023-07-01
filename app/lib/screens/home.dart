@@ -37,7 +37,9 @@ class _HomeState extends State<Home> {
             Container(
               margin: const EdgeInsets.only(bottom: 20, top: 40),
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/volunteer-dashboard');
+                },
                 icon: const Icon(Icons.login),
                 label: const Text(
                   "Login",

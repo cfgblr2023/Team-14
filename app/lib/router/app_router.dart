@@ -1,3 +1,4 @@
+import 'package:app/screens/volunteerDashboard.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/home.dart';
@@ -13,6 +14,8 @@ class AppRouter {
         return getIndexRoute();
       case '/register':
         return getRegisterRoute();
+      case '/volunteer-dashboard':
+        return getVolunteerDashboardRoute();
     }
     return null;
   }
@@ -30,6 +33,13 @@ class AppRouter {
     return MaterialPageRoute(
       // Builder Function
       builder: (context) => const MyRegister(),
+    );
+  }
+
+  Route? getVolunteerDashboardRoute() {
+    return MaterialPageRoute(
+      // Builder Function
+      builder: (context) => const VolunteerDashboard(),
     );
   }
 }
