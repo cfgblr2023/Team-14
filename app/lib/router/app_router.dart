@@ -1,3 +1,4 @@
+import 'package:app/screens/login.dart';
 import 'package:app/screens/upload.dart';
 import 'package:app/screens/volunteerDashboard.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class AppRouter {
         return getVolunteerDashboardRoute();
       case '/dashboard':
         return getDashboardRoute();
+      case '/login':
+        return getLoginRoute();
     }
     return null;
   }
@@ -28,6 +31,13 @@ class AppRouter {
     return MaterialPageRoute(
       // Builder Function
       builder: (context) => Upload(),
+    );
+  }
+
+  Route? getLoginRoute() {
+    return MaterialPageRoute(
+      // Builder Function
+      builder: (context) => const MyLogin(),
     );
   }
 
