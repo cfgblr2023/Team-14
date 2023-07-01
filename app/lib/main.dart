@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:app/constants/colors.dart';
-import 'package:app/router/app_router.dart';
 import 'package:flutter/services.dart';
+
+import 'screens/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,8 +10,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});  
-  final AppRouter _appRouter = AppRouter();
+  MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +18,14 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
 
-    // Returning the Material App
     return MaterialApp(
       title: 'Sensing Local',
-
-      // Configuring Theme
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: SecondaryColor),
-        useMaterial3: true,
-      ),
-
-      // Managing Routes
-      onGenerateRoute: _appRouter.onGenerateRoute,
+          // Customize your app's theme here
+          ),
+      routes: {
+        '/': (context) => Login(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
