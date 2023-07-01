@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
             Center(
               child: Text(
                 "Walkable Cities",
-                style: GoogleFonts.righteous(
+                style: GoogleFonts.poppins(
                     color: White, fontSize: 40, fontWeight: FontWeight.w700),
               ),
             ),
@@ -48,7 +48,27 @@ class _HomeState extends State<Home> {
                     borderRadius: BorderRadius.circular(32.0),
                   ),
                   foregroundColor: PrimaryColor,
-                  minimumSize: const Size(300, 50),
+                  minimumSize: const Size(350, 50),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                icon: const Icon(Icons.volunteer_activism),
+                label: const Text(
+                  "Become a Volunteer",
+                  style: TextStyle(fontSize: 20),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
+                  ),
+                  foregroundColor: PrimaryColor,
+                  minimumSize: const Size(350, 50),
                 ),
               ),
             ),
@@ -58,7 +78,7 @@ class _HomeState extends State<Home> {
               },
               icon: const Icon(Icons.app_registration_rounded),
               label: const Text(
-                "Resgister",
+                "Register",
                 style: TextStyle(fontSize: 20),
               ),
               style: ElevatedButton.styleFrom(
@@ -66,7 +86,7 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(32.0),
                 ),
                 foregroundColor: PrimaryColor,
-                minimumSize: const Size(300, 50),
+                minimumSize: const Size(350, 50),
               ),
             ),
           ],
