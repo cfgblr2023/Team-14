@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:app/constants/colors.dart';
 import 'package:app/router/app_router.dart';
 import 'package:flutter/services.dart';
+import 'package:app/api/auth_api.dart';
+import 'package:dio/dio.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

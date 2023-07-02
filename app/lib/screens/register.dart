@@ -1,7 +1,11 @@
+import 'package:app/api/models/RegisterUserRequest.dart';
 import 'package:app/components/GradientContainer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:app/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../api/auth_api.dart';
 
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
@@ -11,6 +15,31 @@ class MyRegister extends StatefulWidget {
 }
 
 class _MyRegisterState extends State<MyRegister> {
+  final AuthClient _authClient = AuthClient(Dio());
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void submitHandler() async {
+    _authClient
+        .registerUser(RegisterUserRequest(
+            name: _nameController.text,
+            email: _emailController.text,
+            password: _passwordController.text))
+        .then((value) => {
+              if (value.success)
+                {Navigator.pushNamed(context, '/dashboard')}
+              else
+                {Navigator.pushNamed(context, '/register')}
+            });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +89,7 @@ class _MyRegisterState extends State<MyRegister> {
                         child: Column(
                           children: [
                             TextField(
+                              controller: _nameController,
                               style: const TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -79,6 +109,7 @@ class _MyRegisterState extends State<MyRegister> {
                               height: 30,
                             ),
                             TextField(
+                              controller: _emailController,
                               style: const TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -98,6 +129,7 @@ class _MyRegisterState extends State<MyRegister> {
                               height: 30,
                             ),
                             TextField(
+                              controller: _passwordController,
                               style: const TextStyle(color: Colors.white),
                               obscureText: true,
                               decoration: InputDecoration(
@@ -131,7 +163,9 @@ class _MyRegisterState extends State<MyRegister> {
                                   backgroundColor: White,
                                   child: IconButton(
                                       color: PrimaryColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        submitHandler();
+                                      },
                                       icon: Icon(
                                         Icons.arrow_forward,
                                       )),
