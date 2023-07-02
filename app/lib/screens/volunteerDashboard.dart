@@ -52,7 +52,7 @@ class EntryCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   clipBehavior: Clip.hardEdge,
                   child: Image.network(
-                      "https://images.pexels.com/photos/17115830/pexels-photo-17115830/free-photo-of-woman-in-coat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
+                      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/A_footpath_on_Walker%27s_Road_-_panoramio.jpg/900px-A_footpath_on_Walker%27s_Road_-_panoramio.jpg?20170104081538"),
                 ),
                 const SizedBox(
                   height: 20,

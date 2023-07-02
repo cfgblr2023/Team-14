@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:app/components/GradientContainer.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:app/constants/colors.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Upload extends StatefulWidget {
   const Upload({super.key});
@@ -13,6 +15,67 @@ class Upload extends StatefulWidget {
 
 class _UploadState extends State<Upload> {
   XFile? image;
+
+  Future<bool> _handleLocationPermission() async {
+      bool serviceEnabled;
+      LocationPermission permission;
+
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+                'Location services are disabled. Please enable the services')));
+        return false;
+      }
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Location permissions are denied')));
+          return false;
+        }
+      }
+      if (permission == LocationPermission.deniedForever) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+                'Location permissions are permanently denied, we cannot request permissions.')));
+        return false;
+      }
+      return true;
+    }
+
+    String? _currentAddress;
+    Position? _currentPosition;
+    double _currentLatitude = 0.0;
+    double _currentLongitude = 0.0;
+
+
+  Future<void> _getCurrentPosition() async {
+      final hasPermission = await _handleLocationPermission();
+      if (!hasPermission) return;
+      await Geolocator.getCurrentPosition(
+              desiredAccuracy: LocationAccuracy.high)
+          .then((Position position) {
+        setState(() => _currentPosition = position);
+        setState(() {
+          _currentLatitude = position.latitude;
+          _currentLongitude = position.longitude;
+        });
+
+        print('CURRENT POS: $_currentPosition');
+      }).catchError((e) {
+        debugPrint(e);
+      });
+    }
+
+
+   @override
+    void initState() {
+      _getCurrentPosition();
+      super.initState();
+      
+    }
 
   final ImagePicker picker = ImagePicker();
 
@@ -60,6 +123,10 @@ class _UploadState extends State<Upload> {
 
   @override
   Widget build(BuildContext context) {
+    
+    
+   
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Upload the Image'),
@@ -81,6 +148,7 @@ class _UploadState extends State<Upload> {
               ),
               ElevatedButton.icon(
                 onPressed: () {
+                  _getCurrentPosition();
                   myAlert();
                 },
                 style: ButtonStyle(
@@ -112,10 +180,22 @@ class _UploadState extends State<Upload> {
                     )
                   : const Text(
                       "No Image",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: White),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: White),
                     ),
-              SizedBox(height: 40,),
-              
+              SizedBox(
+                height: 40,
+              ),
+              Text(
+                "Latitude: " +
+                    _currentLatitude.toString() +
+                    " Longitude: " +
+                    _currentLongitude.toString(),
+                style: TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.w500, color: White),
+              ),
             ],
           ),
         ),
