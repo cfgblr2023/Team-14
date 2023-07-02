@@ -1,7 +1,11 @@
 import 'package:app/components/GradientContainer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:app/constants/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../api/auth_api.dart';
+import '../api/models/RegisterUserRequest.dart';
 
 class RegisterVolunteer extends StatefulWidget {
   const RegisterVolunteer({Key? key}) : super(key: key);
@@ -11,6 +15,25 @@ class RegisterVolunteer extends StatefulWidget {
 }
 
 class _RegisterVolunteerState extends State<RegisterVolunteer> {
+  final AuthClient _authClient = AuthClient(Dio());
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+   void submitHandler() async {
+    _authClient
+        .registerUser(RegisterUserRequest(
+            name: _nameController.text,
+            email: _emailController.text,
+            password: _passwordController.text))
+        .then((value) => {
+              if (value.success)
+                {Navigator.pushNamed(context, '/volunteer-dashboard')}
+              else
+                {Navigator.pushNamed(context, '/register')}
+            });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,7 +154,9 @@ class _RegisterVolunteerState extends State<RegisterVolunteer> {
                                   backgroundColor: White,
                                   child: IconButton(
                                       color: PrimaryColor,
-                                      onPressed: () {Navigator.pushNamed(context, '/volunteer-dashboard');},
+                                      onPressed: () {
+                                        submitHandler();
+                                      },
                                       icon: Icon(
                                         Icons.arrow_forward,
                                       )),

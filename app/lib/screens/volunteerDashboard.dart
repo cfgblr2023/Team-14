@@ -84,19 +84,6 @@ class EntryCard extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.thumb_down, color: Colors.red),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.thumb_up, color: Colors.green),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
@@ -106,10 +93,50 @@ class EntryCard extends StatelessWidget {
   }
 }
 
-class ApprovalModal extends StatelessWidget {
-  const ApprovalModal({
+class ApprovalModal extends StatefulWidget {
+  ApprovalModal({
     super.key,
   });
+
+  @override
+  State<ApprovalModal> createState() => _ApprovalModalState();
+}
+
+class _ApprovalModalState extends State<ApprovalModal> {
+  final List<DropdownMenuItem<String>> approve_items = [
+    DropdownMenuItem(
+      child: Text("Visit Required"),
+      value: "Visit Required",
+    ),
+    DropdownMenuItem(
+      child: Text("Pass"),
+      value: "Pass",
+    ),
+  ];
+  final List<DropdownMenuItem<String>> items = [
+    DropdownMenuItem(
+      child: Text('Enchrochment'),
+      value: 'Encroachment',
+    ),
+    DropdownMenuItem(
+      child: Text('Footpath Quality'),
+      value: 'Footpath Quality',
+    ),
+    DropdownMenuItem(
+      child: Text('Obstruction'),
+      value: "Obstruction",
+    ),
+    DropdownMenuItem(
+      child: Text('Unsafe Zone'),
+      value: 'Unsafe Zone',
+    ),
+    DropdownMenuItem(
+      child: Text("Waste"),
+      value: "Waste",
+    ),
+  ];
+  String dropdownValue = 'Encroachment';
+  String approveDropdownValue = 'Visit Required';
 
   @override
   Widget build(BuildContext context) {
@@ -143,16 +170,67 @@ class ApprovalModal extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          DropdownButton<String>(
+            items: items,
+            onChanged: (String? value) {
+              setState(() {
+                dropdownValue = value!;
+              });
+            },
+            value: dropdownValue,
+          ),
+          DropdownButton<String>(
+            items: approve_items,
+            onChanged: (String? value) {
+              setState(() {
+                approveDropdownValue = value!;
+              });
+            },
+            value: approveDropdownValue,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.thumb_down, color: Colors.red),
+                onPressed: () {
+                  // Show Alert
+
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Are you sure?'),
+                          content: const Text(
+                              'Are you sure you want to reject this entry?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('No'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Yes'),
+                            ),
+                          ],
+                        );
+                      });
+
+                      Navigator.pop(context);
+                },
+                icon: Icon(Icons.dangerous_sharp, color: Colors.red),
               ),
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.thumb_up, color: Colors.green),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.approval_rounded, color: Colors.green),
               ),
             ],
           )

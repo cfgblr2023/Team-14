@@ -1,5 +1,5 @@
-import 'package:app/api/models/LoginRequest.dart';
-import 'package:app/api/models/LoginResponse.dart';
+import './models/LoginRequest.dart';
+import './models/LoginResponse.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 

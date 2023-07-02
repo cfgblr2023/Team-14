@@ -32,7 +32,7 @@ class _MyLoginState extends State<MyLogin> {
               email: _emailController.text, password: _passwordController.text))
           .then((value) {
         if (value.success) {
-          Navigator.pushNamed(context, '/dashboard');
+          Navigator.pushNamed(context, '/volunteer-dashboard');
         } else {
           Navigator.pushNamed(context, '/login');
         }
@@ -141,8 +141,7 @@ class _MyLoginState extends State<MyLogin> {
                                   child: IconButton(
                                       color: PrimaryColor,
                                       onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/dashboard');
+                                        submitHandler();
                                       },
                                       icon: Icon(
                                         Icons.arrow_forward,
