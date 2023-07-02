@@ -5,11 +5,10 @@ import tensorflow as tf
 import cv2
 import shutil
 import random
-
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 predicted_label = ""
-
 
 @app.route("/predict", methods=['POST'])
 def prediction():
@@ -26,12 +25,7 @@ def prediction():
     image = cv2.imread('image/image.jpg')
     if image is None:
         return 'Failed to read the image file'
-    # Load the image
-    # image_path = "image.jpg"
-    # image = cv2.imread(image_path)
 
-    # Preprocess the image
-    # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Convert BGR to RGB
     # Resize to match the expected input shape
     image = cv2.resize(image, (224, 224))
     image = image / 255.0  # Normalize pixel values to [0, 1]
@@ -46,7 +40,7 @@ def prediction():
     class_index = tf.argmax(pred, axis=1)[0].numpy()
 
     predicted_label = class_names[class_index]
-    return class_names[class_index]
+    return predicted_label
 
 
 @app.route("/correction", methods=['POST'])
@@ -59,7 +53,10 @@ def correction():
     return "corrected"
 
 
-@app.route("/training", methods=['POST'])
+# @app.route("/training", methods=['POST'])
 def train():
     #code to retrain the model goes here using the corrected dataset#
     return "Retrain succesfull"
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=train(), trigger="interval", seconds=604800)
+scheduler.start()
